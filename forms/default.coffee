@@ -1,34 +1,55 @@
-attendee =
-  honorificPrefix:
-    type: "string", displayName: "Titel", required: false
-  familyName:
-    type: "string", displayName: "Nachname", required: true
-  givenName:
-    type: "string", displayName: "Vorname", required: true
-  gender:
-    type: "radio", displayName: "Anrede", required: true # Joi.valid("male", "female").required()
-  birthDate:
-    type: "date", displayName: "Geburtstag", required: false # Joi.date().format("YYYY-MM-DD").allow("").raw().default("")
-  jobTitle:
-    type: "string", displayName: "Beruf", required: false
-  email:
-    type: "string", displayName: "Email", required: true  # Joi.string().email().min(1).trim().required().default("")
-  telephone:
-    type: "string", displayName: "Telefon", required: true
-  "address.streetAddress":
-    type: "string", displayName: "Strasse", required: false
-  "address.postalCode":
-    type: "number", displayName: "PLZ", required: false
-  "address.addressLocality":
-    type: "dropdown", displayName: "Ort", required: false # hier sollten automatisch die möglichen Orte von dir eingefügt werden
-  "address.addressCountry":
-    type: "string", displayName: "Land", required: false
+# http://jsfiddle.net/rbt6r8ve/
+# denn attendee gibt es als json, der rest ist nur zum verdeutlichen
+attendee = [
+  {name: "honorificPrefix",         view: "text", type: "string", label: "Titel",     required: false}
+  {name: "familyName",              view: "text", type: "string", label: "Nachname",  required: true}
+  {name: "givenName",               view: "text", type: "string", label: "Vorname",   required: true}
+  {name: "gender",                  view: "radio",type: "radio",  label: "Anrede",    required: true, options:[ {id: "male", value:"männlich"}, {id: "female", value:"weiblich"} ], invalidMessage: "Geschlecht wird benötigt"}
+  {name: "birthDate",               view: "text", type: "date",   label: "Geburtstag",required: false } # format("YYYY-MM-DD")
+  {name: "jobTitle",                view: "text", type: "string", label: "Beruf",     required: true}
+  {name: "email",                   view: "text", type: "email",  label: "Email",     required: true}
+  {name: "telephone",               view: "text", type: "string", label: "Telefon",   required: true}
+  {name: "address.streetAddress",   view: "text", type: "string", label: "Strasse",   required: false}
+  {name: "address.postalCode",      view: "text", type: "number", label: "PLZ",       required: false}
+  {name: "address.addressLocality", view: "text", type: "select", label: "Ort",       required: false}
+  {name: "address.addressCountry",  view: "text", type: "string", label: "Land",      required: true, value: "Österreich"}
+]
 
-schema =
-  id:
-    type: "string", required: true # Joi.string().required()
-  attendee:
-    type: "array", keys: "attendee" # Joi.array().items(attendee)
+window.postFormValues = ->
+  registerUrl = "https://api.dioezese-linz.at/events"
+  console.log payload = {attendee: [$$("personForm").getValues()]}
+  registerOpts =
+    method: 'post'
+    body: null
+    headers:
+      'content-type': 'application/json; charset=utf-8'
+  payload.id = 'test-validation'
+
+  registerOpts.body = JSON.stringify(payload)
+  fetch(registerUrl, registerOpts).then((res) -> res.json()).then((json) -> console.log json).catch((err) -> console.log err)
 
 
-module.exports = schema
+webix.ui({
+  view: "form"
+  complexData: true
+  id: "personForm"
+  rows: attendee.concat([{view: "button", value:"Abschicken", type: "form", click: -> postFormValues()}])
+})
+
+
+
+###  eine validierungsmöglichkeit
+    view:"form1",
+    elements:[
+        { view:"text", label:'Username', name:"login" },
+        { view:"text", label:'E-mail address', name:"email"},
+        { view:"text", label:'Password', name:"password"},
+        { view:"checkbox", labelRight:'I accept terms of use', name:"accept"}
+    ],
+    rules:{
+        login: webix.rules.isNotEmpty,
+        email: webix.rules.isEmail,
+        password: webix.rules.isNumber,
+        accept: webix.rules.isChecked
+    }
+###
