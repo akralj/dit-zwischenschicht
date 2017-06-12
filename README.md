@@ -3,8 +3,8 @@
 Bei register bitte nur folgende ids verwenden:
 
 1. "test-validation" - testet, ob die payload valide ist. Als Ergebnis wird die payload zurückgegeben oder eine validierungsfehlermeldung zurückgeben (https://github.com/hapijs/joi)
-2. "DIOKV_1" - test event progress
-3. "999_13758" - test event kiribati
+2. "DIOKV_1" - test event progress ("Test Online" Mandant)
+3. "999_13758" - test event kiribati (Kiribati Schulungen)
 
 Bitte solange mit "test-validation" testen, bis dieser läuft.
 
