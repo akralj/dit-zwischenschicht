@@ -50,4 +50,9 @@ module.exports = ->
     ]
     # attendees: {value: 6}
     # or noOfAttendees: 6 (extra: so 1 with name + 6 = 7)
+  additionalData:
+    acceptPolicy: 1
+    description: "Pfarre Althofen"
+    # XXX needs different validation, like in contacts because otherwise birthdate could be empty.
+    children: [{name: "Franzi", birthDate: "2013-01-13"}, {name: "Hans", birthDate: "2011-01-13"}]
   }

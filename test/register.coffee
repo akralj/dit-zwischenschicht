@@ -3,11 +3,12 @@
 #
 
 test      = require('prova')
-_         = require('underscore')
+_         = require('lodash')
 fetch     = require('isomorphic-fetch')
-uuid      = require('node-uuid')
+uuid      = require('uuid')
 
-registerUrl   = "http://localhost:7030/events"
+# !!! kiribati-progress muss auf dev maschine laufen !!!
+#registerUrl   = "http://localhost:7030/events"
 # production
 registerUrl = "https://api.dioezese-linz.at/events" #
 
@@ -33,7 +34,10 @@ test "validation: error, 'cause no id", (t) ->
   payload    = require("./data/correctRegisterRecord")()
   registerOpts.body = JSON.stringify payload
   fetch(registerUrl, registerOpts).then((res) -> res.json())
-  .then((json) -> console.log json; t.equals(json.message, "ValidationError") )
+  .then((json) ->
+    #console.log json
+    t.equals(json.message, "ValidationError")
+  )
 
 
 test "validation: error", (t) ->
@@ -45,7 +49,7 @@ test "validation: error", (t) ->
   registerOpts.body = JSON.stringify payload
   fetch(registerUrl, registerOpts).then((res) -> res.json())
   .then((json) ->
-    console.log json
+    #console.log json
     t.equals(json.message, "ValidationError")
   )
 
@@ -63,7 +67,7 @@ test "validation: success", (t) ->
 test "register progress: success", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
-  payload.id = "DIOKV_1"
+  payload.id = "DIOKV_2"
   payload.attendee = payload.attendee.map (item) ->
     item.familyName = "name:#{uuid.v1()}"
     item
@@ -85,4 +89,4 @@ test "register kiribati: success", (t) ->
   .then((json) ->
     #console.log json
     t.equal(json.code, 201)
-  )
+  ).catch (err) -> console.log "ERROR:", err

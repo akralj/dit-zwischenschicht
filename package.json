@@ -1,0 +1,11 @@
+{
+  "name": "dit-zwischenschicht-tests",
+  "version": "0.1.0",
+  "description": "",
+  "main": "minimalTest.js",
+  "scripts": {
+    "test": "coffee test/index.coffee"
+  },
+  "author": "",
+  "license": "ISC"
+}
