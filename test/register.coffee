@@ -8,9 +8,9 @@ fetch     = require('isomorphic-fetch')
 uuid      = require('uuid')
 
 # !!! kiribati-progress muss auf dev maschine laufen !!!
-#registerUrl   = "http://localhost:7030/events"
+registerUrl   = "http://localhost:7030/events"
 # production
-registerUrl = "https://api.dioezese-linz.at/events" #
+#registerUrl = "https://api.dioezese-linz.at/events" #
 
 
 registerOpts  =
@@ -67,7 +67,7 @@ test "validation: success", (t) ->
 test "register progress: success", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
-  payload.id = "DIOKV_2"
+  payload.id = "DIOKV_2" # for now js testing: "DIOJS_340"
   payload.attendee = payload.attendee.map (item) ->
     item.familyName = "name:#{uuid.v1()}"
     item
@@ -75,7 +75,10 @@ test "register progress: success", (t) ->
   registerOpts.body = JSON.stringify payload
 
   fetch(registerUrl, registerOpts).then((res) -> res.json())
-  .then((json) -> t.ok(json?.id) )
+  .then((json) ->
+    console.log json
+    t.equals(json?.code, 201)
+  ).catch (err) -> console.log err
 
 
 test "register kiribati: success", (t) ->
