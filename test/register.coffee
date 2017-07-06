@@ -65,7 +65,7 @@ test "validation: success", (t) ->
 
 
 test "register progress: success", (t) ->
-  t.plan 1
+  t.plan 2
   payload    = require("./data/correctRegisterRecord")()
   payload.id = "DIOKV_2" # for now js testing: "DIOJS_340"
   payload.attendee = payload.attendee.map (item) ->
@@ -76,11 +76,12 @@ test "register progress: success", (t) ->
 
   fetch(registerUrl, registerOpts).then((res) -> res.json())
   .then((json) ->
-    console.log json
+    #console.log json
     t.equals(json?.code, 201)
+    t.equals(json?.data?.billing?.bic, "BIC0000000")
   ).catch (err) -> console.log err
 
-
+###
 test "register kiribati: success", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
@@ -93,3 +94,4 @@ test "register kiribati: success", (t) ->
     #console.log json
     t.equal(json.code, 201)
   ).catch (err) -> console.log "ERROR:", err
+###
