@@ -2,13 +2,15 @@
   "name": "dit-zwischenschicht-tests",
   "version": "0.1.0",
   "description": "",
-  "main": "minimalTest.js",
+  "private": true,
   "scripts": {
-    "test": "coffee test/index.coffee"
+    "test": "coffee test/index.coffee | tap-spec"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "akralj",
   "dependencies": {
-    "prova": "^3.0.0"
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.10",
+    "tap": "^12.0.1",
+    "tap-spec": "^5.0.0"
   }
 }

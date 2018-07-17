@@ -4,6 +4,10 @@ registerUrl = "https://api.dioezese-linz.at/events";
 
 payload = {
   id: null,
+  additionalData: {
+  acceptPolicy: true,
+  description: "Pfarre Althofen"
+  },
   attendee: [
     {
       gender: "female",

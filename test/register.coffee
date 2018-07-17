@@ -2,15 +2,15 @@
 #
 #
 
-test      = require('prova')
-_         = require('lodash')
-fetch     = require('isomorphic-fetch')
-uuid      = require('uuid')
+tap      = require('tap')
+_        = require('lodash')
+fetch    = require('isomorphic-fetch')
+uuid     = require('uuid')
 
-# !!! kiribati-progress muss auf dev maschine laufen !!!
-registerUrl   = "http://localhost:7030/events"
+# !!! events und kiribati-progress muss auf dev maschine laufen !!!
+#registerUrl   = "http://localhost:7030/events"
 # production
-#registerUrl = "https://api.dioezese-linz.at/events" #
+registerUrl = "https://api.dioezese-linz.at/events" #
 
 
 registerOpts  =
@@ -20,7 +20,7 @@ registerOpts  =
     "content-type":"application/json; charset=utf-8"
 
 
-test "test with nonexisten event ID ", (t) ->
+tap.test "test with nonexisten event ID ", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
   payload.id = "test-event-not-exists"
@@ -29,7 +29,7 @@ test "test with nonexisten event ID ", (t) ->
   .then((json) -> t.equals(json.message, "Event does not exist!") )
 
 
-test "validation: error, 'cause no id", (t) ->
+tap.test "validation: error, 'cause no id", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
   registerOpts.body = JSON.stringify payload
@@ -40,7 +40,7 @@ test "validation: error, 'cause no id", (t) ->
   )
 
 
-test "validation: error", (t) ->
+tap.test "validation: error", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
   # createdAt needs to be here, because request never reaches rest endpoint
@@ -54,7 +54,7 @@ test "validation: error", (t) ->
   )
 
 
-test "validation: success", (t) ->
+tap.test "validation: success", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
   payload.id = "test-validation"
@@ -64,7 +64,7 @@ test "validation: success", (t) ->
   .then((json) -> t.ok(json?.id) )
 
 
-test "register progress: success", (t) ->
+tap.test "register progress: success", (t) ->
   t.plan 2
   payload    = require("./data/correctRegisterRecord")()
   payload.id = "DIOKV_2" # for now js testing: "DIOJS_340"
@@ -82,7 +82,7 @@ test "register progress: success", (t) ->
   ).catch (err) -> console.log err
 
 ###
-test "register kiribati: success", (t) ->
+tap.test "register kiribati: success", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
 
