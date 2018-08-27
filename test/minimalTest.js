@@ -49,7 +49,7 @@ registerOpts = {
   }
 };
 
-payload.id = "999_13798";
+payload.id = "test-validation"; //999_13798 -> kiribati test record
 
 registerOpts.body = JSON.stringify(payload);
 
