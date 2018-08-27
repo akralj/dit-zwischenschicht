@@ -5,15 +5,15 @@ registerUrl = "https://api.dioezese-linz.at/events";
 payload = {
   id: null,
   additionalData: {
-  acceptPolicy: true,
-  description: "Pfarre Althofen"
+   acceptPolicy: true,
+   description: "Pfarre Althofen\nPERSONEN 2"
   },
   attendee: [
     {
       gender: "female",
       honorificPrefix: "Drs.",
-      familyName: "Reiter",
-      givenName: "franziska",
+      familyName: "MiniTest",
+      givenName: "testVorname",
       email: "fran@reiter.at",
       telephone: "160 / 34234243",
       birthDate: "2016-05-12",
@@ -49,7 +49,7 @@ registerOpts = {
   }
 };
 
-payload.id = "test-validation";
+payload.id = "999_13798";
 
 registerOpts.body = JSON.stringify(payload);
 

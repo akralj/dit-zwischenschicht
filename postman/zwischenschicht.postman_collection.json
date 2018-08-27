@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "a9d8458b-3ba6-435a-86fe-980ef3e3f27b",
+		"name": "zwischenschicht",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. validation only - no record being created",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"test-validation\",\n  \"attendee\": [\n    {\n      \"gender\": \"male\",\n      \"honorificPrefix\": \"Dr.\",\n      \"familyName\": \"Simpson no08\",\n      \"givenName\": \"Homer\",\n      \"email\": \"asdf@foo.de\",\n      \"telephone\": \"1234123 \",\n      \"birthDate\": \"1989-12-17\",\n      \"jobTitle\": \"singer\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"744 Evergreen Terrace\",\n        \"postalCode\": \"0001\",\n        \"addressLocality\": \"Springfield\",\n        \"addressCountry\": \"de\"\n      }\n    },\n    {\n      \"gender\": \"female\",\n      \"honorificPrefix\": \"Drs.\",\n      \"familyName\": \"Reiter no08\",\n      \"givenName\": \"franziska\",\n      \"email\": \"fran@reiter.at\",\n      \"telephone\": \"160 / 34234243\",\n      \"birthDate\": \"2016-05-12\",\n      \"jobTitle\": \"singer\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"heustadl\",\n        \"postalCode\": \"1234\",\n        \"addressLocality\": \"Villach\"\n      }\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://api.dioezese-linz.at/events",
+					"protocol": "https",
+					"host": [
+						"api",
+						"dioezese-linz",
+						"at"
+					],
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. progress kurs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"DIOKV_4\",\n  \"attendee\": [\n    {\n      \"gender\": \"male\",\n      \"honorificPrefix\": \"Dr.\",\n      \"familyName\": \"Simpson no.18\",\n      \"givenName\": \"Homer\",\n      \"email\": \"asdf@foo.de\",\n      \"telephone\": \"1234123 \",\n      \"birthDate\": \"1989-12-17\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"744 Evergreen Terrace\",\n        \"postalCode\": \"0001\",\n        \"addressLocality\": \"Springfield\",\n        \"addressCountry\": \"de\"\n      }\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://api.dioezese-linz.at/events",
+					"protocol": "https",
+					"host": [
+						"api",
+						"dioezese-linz",
+						"at"
+					],
+					"path": [
+						"events"
+					]
+				},
+				"description": "familyName needs to be changed after each request, because progress validates uniqueness of familyName for each course.\nplease only use test record with id: DIOKV_4."
+			},
+			"response": []
+		},
+		{
+			"name": "3. kiribati kurs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"999_13798\",\n  \"attendee\": [\n    {\n      \"gender\": \"male\",\n      \"honorificPrefix\": \"Dr.\",\n      \"familyName\": \"Simpson no08\",\n      \"givenName\": \"Homer\",\n      \"email\": \"asdf@foo.de\",\n      \"telephone\": \"1234123 \",\n      \"birthDate\": \"1989-12-17\",\n      \"jobTitle\": \"singer\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"744 Evergreen Terrace\",\n        \"postalCode\": \"0001\",\n        \"addressLocality\": \"Springfield\",\n        \"addressCountry\": \"de\"\n      }\n    },\n    {\n      \"gender\": \"female\",\n      \"honorificPrefix\": \"Drs.\",\n      \"familyName\": \"Reiter no08\",\n      \"givenName\": \"franziska\",\n      \"email\": \"fran@reiter.at\",\n      \"telephone\": \"160 / 34234243\",\n      \"birthDate\": \"2016-05-12\",\n      \"jobTitle\": \"singer\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"heustadl\",\n        \"postalCode\": \"1234\",\n        \"addressLocality\": \"Villach\"\n      }\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://api.dioezese-linz.at/events",
+					"protocol": "https",
+					"host": [
+						"api",
+						"dioezese-linz",
+						"at"
+					],
+					"path": [
+						"events"
+					]
+				},
+				"description": "can be used a million times, because there is no validation in kiribati.\nplease only use test record with id: \"999_13758\""
+			},
+			"response": []
+		}
+	]
+}
