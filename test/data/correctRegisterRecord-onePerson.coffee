@@ -18,21 +18,6 @@ module.exports = ->
           addressLocality:    "Springfield"
           addressCountry:     "de" #https://en.wikipedia.org/wiki/ISO_3166-1
       }
-      {
-        gender:             "female"
-        honorificPrefix:    "Drs."
-        familyName:         "Reiter"
-        givenName:          "franziska"
-        email:              "fran@reiter.at"
-        telephone:          "160 / 34234243"
-        birthDate:          "2016-05-12"
-        address:
-          "@type":            "PostalAddress"
-          streetAddress:      "heustadl"
-          postalCode:         "1234"
-          addressLocality:    "Villach"
-          #addressCountry:     "at" #https://en.wikipedia.org/wiki/ISO_3166-1
-      }
     ]
 
   additionalData:

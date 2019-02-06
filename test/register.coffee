@@ -67,7 +67,8 @@ tap.test "validation: success", (t) ->
 tap.test "register progress: success", (t) ->
   t.plan 2
   payload    = require("./data/correctRegisterRecord")()
-  payload.id = "DIOKV_2" # for now js testing: "DIOJS_340"
+  payload.id = "DIOEF_3196" #geht nicht. no billing
+  payload.id = "DIOKV_2" # paaranmeldung
   payload.attendee = payload.attendee.map (item) ->
     item.familyName = "name:#{uuid.v1()}"
     item
@@ -76,7 +77,7 @@ tap.test "register progress: success", (t) ->
 
   fetch(registerUrl, registerOpts).then((res) -> res.json())
   .then((json) ->
-    #console.log json
+    console.log json
     t.equals(json?.code, 201)
     t.equals(json?.data?.billing?.bic, "BIC0000000")
   ).catch (err) -> console.log err
