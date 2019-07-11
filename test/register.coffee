@@ -77,7 +77,7 @@ tap.test "register progress: success", (t) ->
 
   fetch(registerUrl, registerOpts).then((res) -> res.json())
   .then((json) ->
-    console.log json
+    #console.log json
     t.equals(json?.code, 201)
     t.equals(json?.data?.billing?.bic, "BIC0000000")
   ).catch (err) -> console.log err
