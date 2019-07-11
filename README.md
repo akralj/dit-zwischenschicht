@@ -1,6 +1,5 @@
-# move to events/test code
-
 # Zwischenschicht Tests
+### liegen auf öffentlichen github repo um consumern tests zu ermöglichen 
 
 Bei register bitte nur folgende ids verwenden:
 
