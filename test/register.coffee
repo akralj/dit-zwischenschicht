@@ -82,12 +82,12 @@ tap.test "register progress: success", (t) ->
     t.equals(json?.data?.billing?.bic, "BIC0000000")
   ).catch (err) -> console.log err
 
-###
+
 tap.test "register kiribati: success", (t) ->
   t.plan 1
   payload    = require("./data/correctRegisterRecord")()
 
-  payload.id = "999_13758"
+  payload.id = "999_13798"
   registerOpts.body = JSON.stringify payload
 
   fetch(registerUrl, registerOpts).then((res) -> res.json())
@@ -95,4 +95,3 @@ tap.test "register kiribati: success", (t) ->
     #console.log json
     t.equal(json.code, 201)
   ).catch (err) -> console.log "ERROR:", err
-###
